@@ -19,10 +19,14 @@ module WxMiniprogram
       })
     end
 
-    def get_paid_unionid!(options)
+    def get_paid_unionid!(transaction_id=nil, mch_id=nil, out_trade_no=nil)
+      body = {}
+      body[:transaction_id] = transaction_id unless transaction_id.nil?
+      body[:mch_id] = mch_id unless mch_id.nil?
+      body[:out_trade_no] = out_trade_no unless out_trade_no.nil?
       get("wxa/getpaidunionid", query: {
         :access_token => @access_token
-      }, body: options)
+      }, body: body)
     end
 
     def get_user_encryptKey!(openid, session_key)

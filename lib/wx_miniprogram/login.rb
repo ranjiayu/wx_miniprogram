@@ -8,7 +8,9 @@ module WxMiniprogram
         :secret       => @secret,
         :js_code      => js_code,
         :grant_type   => "authorization_code",
-      })
+      },
+        need_access_token: false
+      )
     end
 
     def check_session_key!(openid, session_key)
@@ -16,7 +18,7 @@ module WxMiniprogram
         :access_token => @access_token,
         :openid       => openid,
         :signature    => hmac_sha256(session_key, ""),
-        :sigmethod    => "hmac_sha256"
+        :sig_method    => "hmac_sha256"
       })
     end
 
@@ -26,7 +28,7 @@ module WxMiniprogram
       }, body: {
         :openid => openid,
         :signature    => hmac_sha256(session_key, ""),
-        :sigmethod    => "hmac_sha256"
+        :sig_method    => "hmac_sha256"
       })
     end
 

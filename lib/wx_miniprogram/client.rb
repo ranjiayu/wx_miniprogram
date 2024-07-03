@@ -31,7 +31,7 @@ module WxMiniprogram
           begin
             send(origin_method, args)
           rescue ApiError => e
-            puts "[debug]: #{e}" if @debug
+            $stderr.puts "[debug]: #{e}" if @debug
             false
           end
         else
@@ -45,20 +45,20 @@ module WxMiniprogram
     end
 
     private
-    def get(path, body: nil, query: nil, need_access_token: false)
+    def get(path, body: nil, query: nil, need_access_token: true)
       need_access_token && valid
       resp = request(path, body: body, query: query, method: "get")
       if !resp["errcode"].nil? && resp["errcode"] != 0
-        raise ApiError, resp["errmsg"]
+        raise ApiError, resp.to_s
       end
       resp
     end
 
-    def post(path, body: nil, query: nil, need_access_token: false)
+    def post(path, body: nil, query: nil, need_access_token: true)
       need_access_token && valid
       resp = request(path, body: body, query: query, method: "post")
       if !resp["errcode"].nil? && resp["errcode"] != 0
-        raise ApiError, resp["errmsg"]
+        raise ApiError, resp.to_s
       end
       resp
     end

@@ -2,7 +2,7 @@
 
 module WxMiniprogram
   module Util
-    def hmac_sha256(data, key)
+    def hmac_sha256(key, data)
       OpenSSL::HMAC.hexdigest("SHA256", key, data)
     end
   end

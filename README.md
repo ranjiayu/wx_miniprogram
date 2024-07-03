@@ -8,7 +8,9 @@ TODO: 小程序码与小程序连接、小程序客服、消息相关、小程�
 
 ## Installation
 
+```shell
 gem install wx_miniprogram
+```
 
 ## Usage
 
@@ -16,19 +18,14 @@ gem install wx_miniprogram
 
 ```ruby
 client = WxMiniprogram::Client.new("appid", "secret")
-
-# Token
 # 获取Token
 client.get_access_token!
 # 获取稳定版Token
 client.get_stable_access_token!
 # 刷新Token
 client.refresh_access_token!
-
-# 用户信息
 # 获取插件用户openpid
 client.get_plugin_open_pid("openid")
-
 # 检查加密信息
 client.check_encrypted_data("encoded_str")
 
@@ -37,7 +34,7 @@ client.check_encrypted_data("encoded_str")
 ```
 ## Test
 
-Set environment variables WX_APPID and WX_SECRET and run tests.
+TODO
 
 设置环境变量 WX_APPID 和 WX_SECRET
 
