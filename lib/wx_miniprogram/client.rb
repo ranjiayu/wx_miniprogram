@@ -9,7 +9,6 @@ module WxMiniprogram
     include Login
     include UserInfo
 
-
     def initialize(appid, secret)
       @url = "https://api.weixin.qq.com/"
       @appid = appid
@@ -25,7 +24,7 @@ module WxMiniprogram
 
     def method_missing(method, *args)
       method_str = method.to_s
-      unless method_str.end_with? "!"
+      if !method_str.end_with? "!"
         origin_method = (method_str + "!").to_sym
         if self.respond_to? origin_method
           begin
@@ -37,11 +36,13 @@ module WxMiniprogram
         else
           raise Error, "undefined method #{method.to_s}"
         end
-      else
-        unless self.respond_to? method
-          raise Error, "undefined method #{method.to_s}"
-        end
+      elif !self.respond_to?(method)
+        raise Error, "undefined method #{method.to_s}"
       end
+    end
+
+    def respond_to_missing?(method, include_private=false)
+      return (self.respond_to? (method.to_s + "!").to_sym) || super
     end
 
     private

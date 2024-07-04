@@ -15,13 +15,13 @@ module WxMiniprogram
       )
     end
 
-    def get_rid_info(rid)
+    def get_rid_info!(rid)
       post("cgi-bin/openapi/rid/get",
             body: {:rid => rid},
             query: {:access_token => @access_token})
     end
 
-    def clear_quota_by_app_secret(appid, appsecret)
+    def clear_quota_by_app_secret!(appid, appsecret)
       post("cgi-bin/clear_quota/v2",
             body: {:appid => appid, :appsecret => appsecret},
             need_access_token: false

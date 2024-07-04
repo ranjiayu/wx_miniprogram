@@ -41,6 +41,5 @@ module WxMiniprogram
       )
     end
 
-
   end
 end
